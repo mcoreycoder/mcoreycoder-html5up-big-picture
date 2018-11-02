@@ -134,8 +134,8 @@
 				<!--<form method="post" action="#" name="submit-to-google-sheet">-->
 				<form id="test-form">
 					<div class="fields">
-						<div class="field half"><input type="text"  name="name" placeholder="Name" /></div>
-						<div class="field half"><input type="email"  name="email" placeholder="Email" /></div>
+						<div class="field half"><input type="text" name="name" placeholder="Name" /></div>
+						<div class="field half"><input type="email" name="email" placeholder="Email" /></div>
 						<div class="field"><textarea name="message" placeholder="Message" rows="6"></textarea></div>
 					</div>
 					<ul class="actions special">
@@ -163,7 +163,8 @@
 
 		<!-- Menu -->
 		<ul class="menu">
-		<li>&copy; Untitled</li><li>Design: <a href="https://html5up.net">HTML5 UP</a></li>
+			<li>&copy; Untitled</li>
+			<li>Design: <a href="https://html5up.net">HTML5 UP</a></li>
 		</ul>
 
 	</footer>
@@ -185,38 +186,41 @@
 	<script>
 
 		//added function to serializObject because that was not a function previously
-		$.fn.serializeObject = function() {
-	var o = {};
-	var a = this.serializeArray();
-	$.each(a, function() {
-		if (o[this.name]) {
-			if (!o[this.name].push) {
-				o[this.name] = [o[this.name]];
-			}
-			o[this.name].push(this.value || '');
-		} else {
-			o[this.name] = this.value || '';
-		}
-	});
-	return o;
-};
+		$.fn.serializeObject = function () {
+			var o = {};
+			var a = this.serializeArray();
+			$.each(a, function () {
+				if (o[this.name]) {
+					if (!o[this.name].push) {
+						o[this.name] = [o[this.name]];
+					}
+					o[this.name].push(this.value || '');
+				} else {
+					o[this.name] = this.value || '';
+				}
+			});
+			return o;
+		};
 
-//goggle ajax request for form details
+		//goggle ajax request for form details
 		var $form = $('form#test-form'),
-    url = 'https://script.google.com/macros/s/AKfycbzrmcu9YTeQBOrFE7pwZQ2nK78TnbiFEpw_wgIZ7AZgJPLp1Do/exec'
+			url = 'https://script.google.com/macros/s/AKfycbzrmcu9YTeQBOrFE7pwZQ2nK78TnbiFEpw_wgIZ7AZgJPLp1Do/exec'
 
-$('#submit-form').on('click', function(e) {
-  e.preventDefault();
-  var jqxhr = $.ajax({
-    url: url,
-    method: "GET",
-    dataType: "json",
-    data: $form.serializeObject()
-  }).success(
-    // do something
-	console.log("worked")
-  );
-})
+		$('#submit-form').on('click', function (e) {
+			$("div.box").replaceWith("<h2 id='contact'; margin: 0px; border-style: none;>Thanks for the message!</h2>");			
+			e.preventDefault();
+			var jqxhr = $.ajax({
+				url: url,
+				method: "GET",
+				dataType: "json",
+				data: $form.serializeObject(),
+			}).success(
+				// do something
+				console.log("it worked")
+			);
+		})
+
+
 
 
 	</script>
